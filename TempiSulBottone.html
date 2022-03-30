@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tempi sul bottone</title>
+    <style>
+      body {
+        background-color: #00ff00;
+        text-align: center;
+      }
+      button {
+        width: 50px;
+        height: 25px;
+        border-radius: 25px;
+        background-color: #ffca3a;
+        border: 0px;
+      }
+      button:hover {
+        background-color: #6a4c93;
+      }
+      #box {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100px;
+        height: 100px;
+        margin: 0 auto;
+        background-color: #00ffff;
+        
+      }
+    </style>
+  </head>
+  <body>
+    <h2>
+      Per far cambiare colore all ogetto, premi il bottone entro 5 secondi.
+    </h2>
+    <div id="box">
+      <button onclick="changeColor()">Premi</button>
+    </div>
+
+    <script>
+      let tempo = Date.now();/*crea una variabile con i millisecondi iniziali*/
+
+      function changeColor() {/*dichiara una funzione che si chiama changeColor*/
+        let tempoAggiornato = (Date.now() - tempo) / 1000;
+/*dichiara una variabile per salvare i secondi trascorsi*/
+        if (tempoAggiornato < 5) {/*se il pulsante è stato premuto in meno di un secondo*/
+          document.getElementById("box").style.backgroundColor = "red";/*cambia il colore del div*/
+          alert("Hai vinto.");/*crea un alert dove verrà scritto "hai vinto"*/
+        } else {/*se no*/
+          alert("Hai perso.");/*crea un alert dove verrà scritto "hai perso" */
+        }
+      }
+    </script>
+  </body>
+</html>
