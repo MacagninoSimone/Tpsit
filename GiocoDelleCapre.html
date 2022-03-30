@@ -1,0 +1,65 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Se premi veloce appare una capra</title>
+  </head>
+  <style>
+    body {
+      background-image: linear-gradient(#7FFFD4, #E52B50);
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+    }
+
+    button {
+      width: 100px;
+      height: 50px;
+      border: 0px;
+      border-radius: 50px;
+      background-color: #800000;
+    }
+    button:hover {
+      background-color: #ffb703;
+    }
+  </style>
+  <body>
+    <div id="box">
+      <button onclick="genera()"><b>PREMI</b></button>
+      <img src="" id="immagine" />
+      <p id="out">
+        Se clicchi il pulsante <i>PREMI</i> ti apparira una capra, se lo premi lentamente ti apparira una pecora.
+      </p>
+    </div>
+    <script>
+      let tempi = new Array();
+      let orarioApertura = Date.now();
+      tempi.push(orarioApertura);
+
+      function setImmagine() {
+        document.getElementById("immagine").style.width = "700px";
+        document.getElementById("immagine").style.height = "500px";
+      }
+
+      function genera() {
+        let nuovoClick = Date.now();
+        tempi.push(nuovoClick);
+        var tempo = (tempi[tempi.length - 1] - tempi[tempi.length - 2]) / 1000;
+
+        if (tempo < 2) {
+          setImmagine();
+          document.getElementById("out").innerHTML =
+            "Hai cliccato troppo velocemente il bottone, quindi ti regalo una bella capra!";
+          document.getElementById("immagine").src =
+            "https://www.filastrocche.it/contenuti/wp-content/uploads/2016/09/capretta-.jpg";
+        } else {
+          setImmagine();
+          document.getElementById("out").innerHTML =
+            "Hai cliccato troppo lentamente il bottone, quindi ti regalo una bella pecora!";
+          document.getElementById("immagine").src =
+            "https://i0.wp.com/www.zooabruzzo.it/zooabruzzo/wp-content/uploads/2019/09/PECORA.jpg?fit=1200%2C740&ssl=1";
+        }
+      }
+    </script>
+  </body>
+</html>
