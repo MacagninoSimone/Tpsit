@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dadi</title>
+    <style>
+      body {
+        background-color:	#800080;
+        
+      }
+      #es1,
+      #es2,
+      #es3 {
+        text-align: center;
+        height: 400px;
+        width: 400px;
+        border: 1px solid black;
+        background-color: grey;
+        background-color: 	#c0c0c0;
+      }
+     
+      #mainBox {
+        display: flex;
+        justify-content: space-between;
+      }
+      #miniBox {
+        height: auto;
+        width: auto;
+        border: 10px solid black;
+        border-radius: 25px;
+      }
+    </style>
+  </head>
+  <body>
+    <p>
+      1)Lancia un dado a n facce (n parametro della funzione lanciadado) Il
+      risultato del lancio lo visualizzo sia in console del browser che nel body
+      della pagina.<br />
+      2) dato il lancio del dado al punto 1 visualizzare un puntino rosso a
+      video se il numero uscito è > (n/2)<br />
+      3)lancia il dado del punto 1 1000 volte<br />
+      4)visuliazza un dado in formato grafico e premendo un bottone "lancio" dai
+      come output il numero nella grafica css scelta<br />
+      5) lancia 2 dadi conteporaneamente e dai tre punti se esce una coppia -1
+      se escono dadi diversi simula un gioco avendo 50 crediti iniziali<br />
+      6) lancia 3 dadi conteporaneamente modifica esercizio 5 dando 10punti se
+      esce un tris
+    </p>
+    <hr />
+ 
+    <div id="mainBox">
+      <div id="miniBox">
+        <div id="es1">
+          <button onclick="lancio(6)">lancio</button>
+          <p id="outes1"></p>
+        </div>
+        <div id="dado"></div>
+      </div>
+      <div id="miniBox">
+        <div id="es2">
+          <button onclick="lancio2(6)">lancio</button>
+          <p id="outes2"></p>
+        </div>
+        <div id="dado2"></div>
+      </div>
+ 
+      <div id="miniBox">
+        <div id="es3">
+          <button onclick="lancio3(6)">lancio</button>
+          <p id="outes3"></p>
+        </div>
+        <div id="dado3"></div>
+      </div>
+    </div>
+    <h2 id="crediti"></h2>
+ 
+    <script>
+      let listaLanciPrimoDado = new Array();
+      let listaLanciSecondoDado = new Array();
+      let listaLanciTerzoDado = new Array();
+      let dadoLanciato = 0;
+      let crediti = 50;
+ 
+      function calcoloPunteggio() {
+        for (let i = 0; i < listaLanciPrimoDado.length; i++) {
+          if (
+            listaLanciPrimoDado[i] == listaLanciSecondoDado[i] ||
+            listaLanciPrimoDado[i] == listaLanciTerzoDado[i] ||
+            listaLanciSecondoDado[i] == listaLanciTerzoDado[i]
+          ) {
+            crediti = crediti + 3;
+          } else {
+            crediti = crediti - 1;
+          }
+          if (
+            listaLanciPrimoDado[i] == listaLanciSecondoDado[i] &&
+            listaLanciSecondoDado[i] == listaLanciTerzoDado[i]
+          )
+            crediti = crediti + 10;
+        }
+        document.getElementById("crediti").innerHTML =
+          "I crediti totali sono:" + crediti;
+      }
+ 
+      function lancio(n) {
+        for (let i = 0; i < 1000; i++) {
+          let dado = 0;
+          dado = Math.round(Math.random() * n + 1);
+          if (dado > n / 2) {
+            var span = document.createElement("span");
+            span.innerHTML = "<span style='color:red'>.</span>";
+            document.getElementById("es1").appendChild(span);
+            console.log(dado);
+          } else {
+            var span = document.createElement("span");
+            span.innerHTML = dado + " ";
+            document.getElementById("es1").appendChild(span);
+            console.log(dado);
+          }
+          
+          listaLanciPrimoDado.push(dado);
+        }
+        if (dadoLanciato < 2) {
+          dadoLanciato = dadoLanciato + 1;
+        } else {
+          calcoloPunteggio();
+        }
+      }
+ 
+      function lancio2(n) {
+        for (let i = 0; i < 1000; i++) {
+          let dado = 0;
+          dado = Math.round(Math.random() * n + 1);
+          if (dado > n / 2) {
+            var span = document.createElement("span");
+            span.innerHTML = "<span style='color:red'>.</span>";
+            document.getElementById("es2").appendChild(span);
+            console.log(dado);
+          } else {
+            var span = document.createElement("span");
+            span.innerHTML = dado + " ";
+            document.getElementById("es2").appendChild(span);
+            console.log(dado);
+          }
+         
+         
+          listaLanciSecondoDado.push(dado);
+        }
+        if (dadoLanciato < 2) {
+          dadoLanciato = dadoLanciato + 1;
+        } else {
+          calcoloPunteggio();
+        }
+      }
+ 
+      function lancio3(n) {
+        for (let i = 0; i < 1000; i++) {
+          let dado = 0;
+          dado = Math.round(Math.random() * n + 1);
+          if (dado > n / 2) {
+            var span = document.createElement("span");
+            span.innerHTML = "<span style='color:red'>.</span>";
+            document.getElementById("es3").appendChild(span);
+            console.log(dado);
+          } else {
+            var span = document.createElement("span");
+            span.innerHTML = dado + " ";
+            document.getElementById("es3").appendChild(span);
+            console.log(dado);
+          }
+        
+          listaLanciTerzoDado.push(dado);
+        }
+        if (dadoLanciato < 2) {
+          dadoLanciato = dadoLanciato + 1;
+        } else {
+          calcoloPunteggio();
+        }
+      }
+    </script>
+  </body>
+</html>
