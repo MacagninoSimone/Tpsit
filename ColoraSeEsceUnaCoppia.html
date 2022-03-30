@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Trova Coppie</title>
+    <style>
+      body {
+        text-align: center;
+        background-image: url(https://www.ilpost.it/wp-content/uploads/2019/07/poker.jpg);
+        background-size: cover;
+      }
+      #lanci{
+        border: solid black 2px;
+        height: 500px;
+        width: 500px;
+        margin:0 auto;
+   
+        padding: 10px;
+       
+        background-color: #CD7F32;
+      }
+      #lanci:hover{
+        background-color: #CD7F32;
+      }
+    </style>
+  </head>
+  <body>
+    <h2>Lancio dei dadi per trovare una coppia</h2>
+    <h3>Se è presente una coppia viene colorata in rosso</h3>
+    <div id ="lanci">
+
+    
+
+    <script>
+      let trovato = false;
+      let dadiUsciti = new Array();
+      let dado = 0;
+      let occorrenza1 = 0;
+      let occorrenza2 = 0;
+      let occorrenza3 = 0;
+      let occorrenza4 = 0;
+      let occorrenza5 = 0;
+      let occorrenza6 = 0;
+
+      for (let i = 0; i < 1000; i++) {
+        do {
+          dado = Math.round(Math.random() * 7);
+        } while (dado == 0 || dado == 7);
+        dadiUsciti.push(dado);
+
+        if (dado == 6) {
+          occorrenza6++;
+        }
+        if (dado == 1) {
+          occorrenza1++;
+        }
+        if (dado == 2) {
+          occorrenza2++;
+        }
+        if (dado == 3) {
+          occorrenza3++;
+        }
+        if (dado == 4) {
+          occorrenza4++;
+        }
+        if (dado == 5) {
+          occorrenza5++;
+        }
+      }
+      for (let i = 0; i < 1000; i++) {
+        trovato = false;
+
+        if (i != dadiUsciti.length - 1) {
+          if (dadiUsciti[i + 0] == dadiUsciti[i + 1]) {
+            document.write(
+              "<span style='color:red'>" + dadiUsciti[i] + " " + "</span>"
+            );
+            trovato = true;
+          }
+        }
+        if (i > 0) {
+          if (dadiUsciti[i + 0] == dadiUsciti[i - 1] && trovato == false) {
+            document.write(
+              "<span style='color:red'>" + dadiUsciti[i] + " " + "</span>"
+            );
+            trovato = true;
+          }
+        }
+        if (trovato == false) {
+          document.write(dadiUsciti[i] + " ");
+        }
+      }
+
+      document.write("</div>")
+      document.write("<hr>");
+      document.write("<br>"+"<span style='color:white'>" + occorrenza1 + " è il numero di volte che è uscito il 1 "+"</span>");
+      document.write("<br>"+"<span style='color:white'>" + occorrenza2 + " è il numero di volte che è uscito il 2 "+"</span>");
+      document.write("<br>"+"<span style='color:white'>" + occorrenza3 + " è il numero di volte che è uscito il 3 "+"</span>");
+      document.write("<br>"+"<span style='color:white'>" + occorrenza4 + " è il numero di volte che è uscito il 4 "+"</span>");
+      document.write("<br>"+"<span style='color:white'>" + occorrenza5 + " è il numero di volte che è uscito il 5 "+"</span>");
+      document.write("<br>"+"<span style='color:white'>" + occorrenza6 + " è il numero di volte che è uscito il 6 "+"</span>");
+    </script>
+  </body>
+</html>
